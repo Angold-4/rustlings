@@ -5,21 +5,21 @@
 // I AM NOT DONE
 
 fn main() {
-    let data = "Rust is great!".to_string();
+    let mut data = "Rust is great!".to_string();
 
-    get_char(data);
+    get_char(&mut data);
 
-    string_uppercase(&data);
-}
+    string_uppercase(data); // after that data, is invalid
+
 
 // Should not take ownership
-fn get_char(data: String) -> char {
-    data.chars().last().unwrap()
+fn get_char(data: &mut String) { // & is terminal
+    data.chars().last().unwrap();
 }
 
 // Should take ownership
-fn string_uppercase(mut data: &String) {
-    data = &data.to_uppercase();
+fn string_uppercase(data: String) {
+    let mut data = data.to_uppercase(); // shadowing
 
     println!("{}", data);
 }
